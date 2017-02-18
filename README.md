@@ -1,28 +1,16 @@
 # Trimtool
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/trimtool`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The internal CLI of Trim Agency. Used to bootstrap projects, setup Heroku, build, test, etc. Will be expanded beyond our specific use cases in an effort to contribute to the development community.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'trimtool'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Run this command to install
 
     $ gem install trimtool
 
 ## Usage
 
-TODO: Write usage instructions here
+Run ```trimtool help``` for a list of commands.
 
 ## Development
 
