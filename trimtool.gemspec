@@ -6,11 +6,11 @@ require 'trimtool/version'
 Gem::Specification.new do |spec|
   spec.name          = "trimtool"
   spec.version       = Trimtool::VERSION
-  spec.authors       = ["TRiM Agency"]
+  spec.authors       = ["Trim Agency"]
   spec.email         = ["info@trimagency.com"]
 
   spec.summary       = %q{The internal CLI of TRiM Agency}
-  spec.homepage      = "https://github.com/TrimAgency/trim-tool"
+  spec.homepage      = "https://github.com/TrimAgency/trimtool"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
