@@ -1,5 +1,5 @@
 require "trimtool/version"
-require "trimtool/cli"
+require "trimtool/main"
 
 module Trimtool
 end
