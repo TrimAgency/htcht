@@ -2,4 +2,4 @@
 
 require 'trimtool'
 
-Trimtool::Cli.start(ARGV)
+Trimtool::Main.start(ARGV)
