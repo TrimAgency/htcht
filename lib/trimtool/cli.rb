@@ -1,9 +1,5 @@
 require "thor"
 
-# The TrimTool
-#
-# ------------
-
 module Trimtool
 
   # All of the Cli related stuff goes in this class
@@ -54,6 +50,8 @@ module Trimtool
       copy_file 'Dockerfile', "#{snake_name}/Dockerfile"
 
       inside(snake_name) do
+        # Build the containers
+        run('docker-compse build')
 
         # Run the command to generate a new rails app
         run(rails_new_command)
@@ -73,6 +71,7 @@ module Trimtool
         gsub_file('Dockerfile', 'RUN gem install rails', '#RUN gem install rails')
         gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
         gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
+        run('docker-compose run app bundle')
         run('docker-compose build')
 
         # Setup the database (Create and Migrate)
