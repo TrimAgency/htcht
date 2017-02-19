@@ -56,12 +56,27 @@ module Trimtool
           copy_file 'Dockerfile', "#{snake_name}/Dockerfile"
 
           inside(snake_name) do
+
+            # Set folder name to snake case app name
+            gsub_file('Dockerfile', '/app', "/#{snake_name}")
+            gsub_file('docker-compose.yml', '/app', "/#{snake_name}")
+
             # Build the containers
             run('docker-compse build')
 
             # Run the command to generate a new rails app
             run(rails_new_command)
 
+            # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
+            gsub_file('Dockerfile', 'RUN gem install rails', '#RUN gem install rails')
+            gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
+            gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
+            run('docker-compose run app bundle')
+            run('docker-compose build')
+
+            # Setup the database (Create and Migrate)
+            run('docker-compose run app rake db:create')
+            run('docker-compose run app rake db:migrate')
           end
         end
       end
