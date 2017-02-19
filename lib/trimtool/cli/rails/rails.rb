@@ -2,14 +2,14 @@ module Trimtool
   module CLI
     module Rails
 
-      class Main < Thor
+      class Rails < Thor
         include Thor::Actions
 
         def self.source_root
           File.dirname(__FILE__)
         end
 
-        desc 'rails new AppName', 'Create a new base Rails App inside a Docker Container with Postgres setup as the database.'
+        desc 'new AppName', 'Create a new base Rails App inside a Docker Container with Postgres setup as the database.'
         method_option :verbose, type: :boolean, default: false, :aliases => '-v', :desc => 'default: [--no-verbose] By default rails new will be run with the quiet flag, this turns it off.'
         method_option :api, type: :boolean, default: false, :desc => 'default: [--no-api] Generate Rails App in API mode.'
         method_option :bootstrap, type: :boolean, default: false, :desc => 'default: [--no-bootstrap] Generate a base Rails app with custom Gemfile and configs. (This along with "--api" is the base for new Rails APIs at Trim Agency).'

@@ -1,5 +1,5 @@
 require 'thor'
-require 'trimtool/cli/rails/main'
+require 'trimtool/cli/rails/rails'
 
 module Trimtool
 
@@ -7,7 +7,7 @@ module Trimtool
   class Main < Thor
 
     desc "rails COMMANDS", "For all your Ruby on Rails needs."
-    subcommand "rails", Trimtool::CLI::Rails::Main
+    subcommand "rails", Trimtool::CLI::Rails::Rails
 
   end
 
