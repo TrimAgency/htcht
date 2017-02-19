@@ -57,15 +57,22 @@ module Trimtool
 
           inside(snake_name) do
 
-            # Set folder name to snake case app name
-            gsub_file('Dockerfile', '/app', "/#{snake_name}")
-            gsub_file('docker-compose.yml', '/app', "/#{snake_name}")
-
             # Build the containers
             run('docker-compse build')
 
             # Run the command to generate a new rails app
             run(rails_new_command)
+
+            # Set the name of the app in application.rb
+            gsub_file('config/application.rb', 'module App', "module #{appname}")
+
+            # Edit database.yml to work with docker
+            insert_into_file('config/database.yml', "\s\susername: postgres\n\s\spassword:\n\s\shost: postgres\n\s\sport: 5432\n", :after => "default: &default\n")
+            gsub_file('config/database.yml', 'app_development', "#{snake_name}_development")
+            gsub_file('config/database.yml', 'app_test', "#{snake_name}_test")
+            gsub_file('config/database.yml', 'app_production', "#{snake_name}_production")
+            gsub_file('config/database.yml', 'username: app', "username: #{snake_name}")
+            gsub_file('config/database.yml', 'APP_DATABASE_PASSWORD', "#{snake_name.upcase}_DATABASE_PASSWORD")
 
             # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
             gsub_file('Dockerfile', 'RUN gem install rails', '#RUN gem install rails')
