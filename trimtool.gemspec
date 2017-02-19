@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Trim Agency"]
   spec.email         = ["info@trimagency.com"]
 
-  spec.summary       = %q{The internal CLI of TRiM Agency}
+  spec.summary       = %q{The internal CLI of Trim Agency}
   spec.homepage      = "https://github.com/TrimAgency/trimtool"
   spec.license       = "MIT"
 
