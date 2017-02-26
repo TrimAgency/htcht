@@ -27,6 +27,7 @@ module Trimtool
           rails_new_command = 'docker-compose run app rails new . --database=postgresql -T --skip-bundle'
 
           # Set the application template
+          # TODO: Refactor to be dynamic from a directory
           if options[:bootstrap] && options[:api]
             copy_file('templates/api_bootstrap_template.rb', "#{snake_name}/api_bootstrap_template.rb")
             copy_file('templates/api_build_files/user_spec.rb', "#{snake_name}/build_files/user_spec.rb")

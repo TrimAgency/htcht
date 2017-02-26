@@ -46,7 +46,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Setup the app config
 # But get the name first
-# Possible refactor (should be able to get the name from the gem?)
+# TODO: Possible refactor (should be able to get the name from the gem?)
 # ----------------------------
 
 puts '**********'
