@@ -1,4 +1,4 @@
-# Trimtool
+# Htcht
 
 The internal CLI of Trim Agency. Used to bootstrap projects, setup Heroku, build, test, etc. Will be expanded beyond our specific use cases in an effort to contribute to the development community.
 
@@ -6,11 +6,11 @@ The internal CLI of Trim Agency. Used to bootstrap projects, setup Heroku, build
 
 Run this command to install
 
-    $ gem install trimtool
+    $ gem install htcht
 
 ## Usage
 
-Run ```trimtool help``` for a list of commands.
+Run ```htcht help``` for a list of commands.
 
 ## Development
 
@@ -20,7 +20,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/trimtool. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/htcht. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

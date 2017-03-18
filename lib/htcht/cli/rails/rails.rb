@@ -1,4 +1,4 @@
-module Trimtool
+module Htcht
   module CLI
     module Rails
 
