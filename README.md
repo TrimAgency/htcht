@@ -1,6 +1,6 @@
 # Htcht
 
-The internal CLI of Trim Agency. Used to bootstrap projects, setup Heroku, build, test, etc. Will be expanded beyond our specific use cases in an effort to contribute to the development community.
+The internal CLI of Trim Agency. Used to setup new projects, build, test, etc.
 
 ## Installation
 
