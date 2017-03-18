@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'trimtool/version'
+require 'htcht/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "trimtool"
-  spec.version       = Trimtool::VERSION
+  spec.name          = "htcht"
+  spec.version       = Htcht::VERSION
   spec.authors       = ["Trim Agency"]
   spec.email         = ["info@trimagency.com"]
 
   spec.summary       = %q{The internal CLI of Trim Agency}
-  spec.homepage      = "https://github.com/TrimAgency/trimtool"
+  spec.homepage      = "https://github.com/TrimAgency/htcht"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "bin"
-  spec.executables   = ["trimtool"]
+  spec.executables   = ["htcht"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor"

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trimtool (0.1.0)
+    htcht (0.1.0)
       thor
 
 GEM
@@ -31,7 +31,7 @@ DEPENDENCIES
   bundler (~> 1.13)
   rake (~> 10.0)
   rspec (~> 3.5)
-  trimtool!
+  htcht!
 
 BUNDLED WITH
    1.14.3
