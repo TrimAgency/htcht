@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Trimtool::Main do
+describe Htcht::Main do
 
   describe 'subcommands' do
 
