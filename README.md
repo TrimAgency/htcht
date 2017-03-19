@@ -4,6 +4,8 @@ The internal CLI of Trim Agency. Used to setup new projects, build, test, etc.
 
 ## Installation
 
+Htcht requires Docker and has only been tested on MacOS.
+
 Run this command to install
 
     $ gem install htcht
@@ -20,7 +22,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/htcht. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/TrimAgency/htcht. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
