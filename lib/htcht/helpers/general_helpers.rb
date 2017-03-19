@@ -1,10 +1,11 @@
 module Htcht
   module Helpers
 
-    class GeneralHelpers
+    module GeneralHelpers
 
       def docker_running?
-        system('docker info')
+        #TODO: look for a better way to do this
+        system('docker ps')
       end
     end
   end

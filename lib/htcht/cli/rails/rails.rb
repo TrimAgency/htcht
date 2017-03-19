@@ -1,3 +1,5 @@
+require 'htcht/helpers/general_helpers'
+
 module Htcht
   module CLI
     module Rails
@@ -17,7 +19,7 @@ module Htcht
         method_option :test, type: :boolean, default: false, :desc => 'default: [--no-test]'
         def new(appname)
           unless docker_running?
-            puts "Could not connect to the Docker deamon. Check that it is installed and running."
+            puts 'Check that Docker is installed and running'
             return
           end
 
