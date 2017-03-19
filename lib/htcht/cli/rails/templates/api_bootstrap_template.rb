@@ -75,6 +75,10 @@ run('bundle install')
 # ----------------------------
 run('rails generate rspec:install')
 
+# Setup Figaro for ENV
+# ----------------------------
+run('bundle exec figaro install')
+
 # Setup Knock for JWT
 # ----------------------------
 run('rails generate knock:install')
