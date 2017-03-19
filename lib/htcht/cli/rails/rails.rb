@@ -89,10 +89,10 @@ module Htcht
 
             # Clean up the template and build files
             if options[:bootstrap] && options[:api]
-              remove_file("/api_bootstrap_template.rb")
-              remove_dir("/build_files/")
+              remove_file("api_bootstrap_template.rb")
+              remove_dir("build_files/")
             else
-              remove_file("/default_template.rb")
+              remove_file("default_template.rb")
             end
           end
 
