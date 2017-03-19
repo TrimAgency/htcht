@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     htcht (0.1.0)
-      thor
+      thor (~> 0.1)
 
 GEM
   remote: https://rubygems.org/

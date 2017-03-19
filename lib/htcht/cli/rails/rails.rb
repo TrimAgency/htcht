@@ -18,6 +18,7 @@ module Htcht
 
           # Format the appname as snake case for folders, etc.
           # This code is taken straight from Rails
+          # TODO: Move to a helper file
           snake_name = appname.gsub(/::/, '/').
             gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
             gsub(/([a-z\d])([A-Z])/,'\1_\2').
@@ -38,7 +39,7 @@ module Htcht
             copy_file('templates/api_build_files/rails_helper.rb', "#{snake_name}/build_files/rails_helper.rb")
             rails_new_command.concat(' -m api_bootstrap_template.rb')
           elsif options[:bootstrap]
-            puts "--bootstrap must be used with --api for now. This is on it's way"
+            puts "--bootstrap must be used with --api for now."
             return
           else
             copy_file 'templates/default_template.rb', "#{snake_name}/default_template.rb"
@@ -86,7 +87,15 @@ module Htcht
             run('docker-compose run app rake db:create')
             run('docker-compose run app rake db:migrate')
 
+            # Clean up the template and build files
+            if options[:bootstrap] && options[:api]
+              remove_file("/api_bootstrap_template.rb")
+              remove_dir("/build_files/")
+            else
+              remove_file("/default_template.rb")
+            end
           end
+
         end
       end
     end
