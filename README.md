@@ -1,4 +1,5 @@
 # Htcht
+[![Gem Version](https://badge.fury.io/rb/htcht.svg)](https://badge.fury.io/rb/htcht)
 
 The internal CLI of Trim Agency. Used to setup new projects, build, test, etc.
 
