@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    htcht (0.1.0)
+    htcht (0.1.1)
       thor (~> 0.1)
 
 GEM
