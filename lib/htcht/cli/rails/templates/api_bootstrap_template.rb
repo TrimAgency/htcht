@@ -79,7 +79,7 @@ run('rails generate rspec:install')
 # ----------------------------
 run('rails generate knock:install')
 run('rails generate knock:token_controller user')
-insert_into_file("app/controllers/application_controller.rb", "include Knock::Authenticable", :after => "class ApplicationController < ActionController::API\n")
+insert_into_file("app/controllers/application_controller.rb", "\s\sinclude Knock::Authenticable\n", :after => "class ApplicationController < ActionController::API\n")
 
 # Generate User Model
 # and add validations to user.rb
