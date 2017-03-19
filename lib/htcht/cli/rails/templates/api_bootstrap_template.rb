@@ -73,13 +73,16 @@ run('bundle install')
 
 # Setup Rspec for Testing
 # ----------------------------
-
 run('rails generate rspec:install')
+
+# Setup Knock for JWT
+# ----------------------------
+run('rails generate knock:install')
+run('rails generate knock:token_controller user')
 
 # Generate User Model
 # and add validations to user.rb
 # ----------------------------
-
 generate(:model, 'User', 'email:uniq:index', 'password:digest')
 user_migration = Dir.glob('db/migrate/*.rb')[0].to_s
 gsub_file(user_migration, 't.string :email', 't.string :email, null: false')
@@ -106,6 +109,8 @@ insert_into_file('app/models/user.rb', after: 'has_secure_password') do
 )
 end
 
+# Copy remaining files to their respective locations
+# ----------------------------
 remove_file('spec/models/user_spec.rb')
 copy_file('build_files/user_spec.rb', 'spec/models/user_spec.rb')
 copy_file('build_files/users.rb', 'spec/factories/users.rb')
@@ -113,5 +118,7 @@ copy_file('build_files/email_validator.rb', 'app/validators/email_validator.rb')
 copy_file('build_files/factory_girl.rb', 'spec/support/factory_girl.rb')
 copy_file('build_files/rails_helper.rb', 'spec/rails_helper.rb')
 copy_file('build_files/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb')
-remove_dir('build_files/')
-
+copy_file('build_files/seeds.rb', 'db/seeds.rb')
+empty_directory('db/seeds')
+empty_directory('db/seeds/development')
+empty_directory('db/seeds/test')

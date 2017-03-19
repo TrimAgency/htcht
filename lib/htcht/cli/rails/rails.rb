@@ -37,6 +37,7 @@ module Htcht
             copy_file('templates/api_build_files/factory_girl.rb', "#{snake_name}/build_files/factory_girl.rb")
             copy_file('templates/api_build_files/shoulda_matchers.rb', "#{snake_name}/build_files/shoulda_matchers.rb")
             copy_file('templates/api_build_files/rails_helper.rb', "#{snake_name}/build_files/rails_helper.rb")
+            copy_file('templates/api_build_files/seeds.rb', "#{snake_name}/build_files/seeds.rb")
             rails_new_command.concat(' -m api_bootstrap_template.rb')
           elsif options[:bootstrap]
             puts "--bootstrap must be used with --api for now."
