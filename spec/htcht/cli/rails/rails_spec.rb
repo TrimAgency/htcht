@@ -8,16 +8,16 @@ describe Htcht::CLI::Rails::Rails do
     end
   end
 
-  describe 'building new Rails apps' do
+  describe 'building new Rails app with default template' do
 
     before :context do
       rails_generator = described_class.new
-      rails_generator.options = { api: true, init: false }
       rails_generator.new("HtchtTestRailsApi")
     end
 
-    describe "building new Rails API" do
-      it "is not testing anything atm" do
+    describe "building new Rails app" do
+      it "creates the application director" do
+        expect(system('ls htcht_test_rails_api')).to be true
       end
     end
 
