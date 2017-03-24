@@ -3,6 +3,7 @@ module Htcht
     module Rails
 
       class Rails < Thor
+        require 'htcht/helpers/name'
         include Thor::Actions
 
         def self.source_root
@@ -17,13 +18,7 @@ module Htcht
         def new(appname)
 
           # Format the appname as snake case for folders, etc.
-          # This code is taken straight from Rails
-          # TODO: Move to a helper file
-          snake_name = appname.gsub(/::/, '/').
-            gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-            gsub(/([a-z\d])([A-Z])/,'\1_\2').
-            tr("-", "_").
-            downcase
+          snake_name = Htcht::Helpers::Name.new(appname).snake_case
 
           rails_new_command = 'docker-compose run app rails new . --database=postgresql --skip-bundle'
 
