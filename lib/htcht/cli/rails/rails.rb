@@ -1,3 +1,5 @@
+require 'htcht/helpers/general_helpers'
+
 module Htcht
   module CLI
     module Rails
@@ -5,6 +7,7 @@ module Htcht
       class Rails < Thor
         require 'htcht/helpers/name'
         include Thor::Actions
+        include Htcht::Helpers::GeneralHelpers
 
         def self.source_root
           File.dirname(__FILE__)
@@ -16,6 +19,11 @@ module Htcht
         method_option :init, type: :boolean, default: false, :aliases => '-i', :desc => 'default: [--no-init] Generate a base Rails app with custom Gemfile and configs. (This along with "--api" is the base for new Rails APIs at Trim Agency).'
         method_option :test, type: :boolean, default: false, :desc => 'default: [--no-test]'
         def new(appname)
+          unless docker_running?
+            puts 'Check that Docker is installed and running'
+            return
+          end
+
 
           # Format the appname as snake case for folders, etc.
           snake_name = Htcht::Helpers::Name.new(appname).snake_case
