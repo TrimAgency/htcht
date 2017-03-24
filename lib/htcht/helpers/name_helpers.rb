@@ -1,12 +1,8 @@
 module Htcht
   module Helpers
-    class Name
+    module NameHelpers
 
-      def initialize(name)
-        @name = name
-      end
-
-      def snake_case 
+      def snake_casify(name)
         name.gsub(/::/, '/').
           gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
           gsub(/([a-z\d])([A-Z])/,'\1_\2').
@@ -14,9 +10,6 @@ module Htcht
           tr("-", "_").
           downcase
       end
-
-      private
-      attr_reader :name
     end
   end
 end
