@@ -7,18 +7,8 @@ end
 gem 'pg'
 
 # Setup the app config
-# But get the name first
-# TODO: Possible refactor (should be able to get the name from the gem?)
-# ----------------------------
-
-puts '**********'
-puts
-appname = ask("What should we call this new app? (CamelCasePlease)")
-snake_name = appname.gsub(/::/, '/').
-  gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-  gsub(/([a-z\d])([A-Z])/,'\1_\2').
-  tr("-", "_").
-  downcase
+appname = "set_appname"
+snake_name = "set_snake_name"
 
 # Set the name of the app in application.rb
 gsub_file('config/application.rb', 'module App', "module #{appname}")
@@ -32,4 +22,3 @@ gsub_file('config/database.yml', 'username: app', "username: #{snake_name}")
 gsub_file('config/database.yml', 'APP_DATABASE_PASSWORD', "#{snake_name.upcase}_DATABASE_PASSWORD")
 
 run('bundle install')
-

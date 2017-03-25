@@ -34,7 +34,8 @@ module Htcht
           # Set the application template
           # TODO: Refactor to be dynamic from a directory
           if options[:init] && options[:api]
-            copy_file('templates/api_init_template.rb', "#{snake_name}/api_init_template.rb")
+            template_path = "#{snake_name}/api_init_template.rb"
+            copy_file('templates/api_init_template.rb', template_path)
             copy_file('templates/api_build_files/user_spec.rb', "#{snake_name}/build_files/user_spec.rb")
             copy_file('templates/api_build_files/users.rb', "#{snake_name}/build_files/users.rb")
             copy_file('templates/api_build_files/email_validator.rb', "#{snake_name}/build_files/email_validator.rb")
@@ -47,8 +48,15 @@ module Htcht
             puts "--init must be used with --api for now."
             return
           else
-            copy_file 'templates/default_template.rb', "#{snake_name}/default_template.rb"
+            template_path = "#{snake_name}/default_template.rb"
+            copy_file 'templates/default_template.rb', template_path 
             rails_new_command.concat(' -m default_template.rb')
+          end
+
+          if defined? template_path
+            add_app_names_to_template(path: template_path,
+                                      appname: appname,
+                                      snake_name: snake_name)
           end
 
           # Copy this over so that Docker can run Rails new
@@ -100,10 +108,15 @@ module Htcht
               remove_file("default_template.rb")
             end
           end
+        end
 
+        private
+
+        def add_app_names_to_template(path:, appname:, snake_name:)
+          gsub_file(path, 'set_appname', appname)
+          gsub_file(path, 'set_snake_name', snake_name)
         end
       end
     end
-
   end
 end
