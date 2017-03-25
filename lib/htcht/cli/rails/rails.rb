@@ -9,6 +9,7 @@ module Htcht
         include Thor::Actions
         include Htcht::Helpers::GeneralHelpers
         include Htcht::Helpers::NameHelpers
+        include Htcht::Helpers::VersionHelpers
 
         def self.source_root
           File.dirname(__FILE__)
@@ -19,6 +20,8 @@ module Htcht
         method_option :api, type: :boolean, default: false, :aliases => '-a', :desc => 'default: [--no-api] Generate Rails App in API mode.'
         method_option :init, type: :boolean, default: false, :aliases => '-i', :desc => 'default: [--no-init] Generate a base Rails app with custom Gemfile and configs. (This along with "--api" is the base for new Rails APIs at Trim Agency).'
         method_option :test, type: :boolean, default: false, :desc => 'default: [--no-test]'
+        method_option :ruby_version, type: :string, default: latest_ruby, :desc => "default: [#{latest_ruby}] Set the version of Ruby to be used."
+        method_option :rails_version, type: :string, default: latest_rails, :desc => "default: [#{latest_rails}] Set the version of Rails to be used."
         def new(appname)
           unless docker_running?
             puts 'Check that Docker is installed and running'
@@ -82,6 +85,10 @@ module Htcht
           empty_directory(snake_name)
           copy_file('docker-compose.yml', "#{snake_name}/docker-compose.yml")
           copy_file('Dockerfile', "#{snake_name}/Dockerfile")
+          gsub_file("#{snake_name}/Dockerfile.yml", 'set_ruby_version', ruby_version)
+          gsub_file("#{snake_name}/Gemfile", 'set_ruby_version', ruby_version)
+          gsub_file("#{snake_name}/Gemfile", 'set_rails_version', rails_version)
+
 
           inside(snake_name) do
 

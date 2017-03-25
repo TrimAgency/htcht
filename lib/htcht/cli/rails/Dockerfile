@@ -1,4 +1,4 @@
-FROM ruby:2.3.3
+FROM set_ruby_version
 MAINTAINER stevetwitte@gmail.com
 
 RUN apt-get update && apt-get install -y \
