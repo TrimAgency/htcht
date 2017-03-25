@@ -1,5 +1,6 @@
 require 'htcht/helpers/general_helpers'
 require 'htcht/helpers/name_helpers'
+require 'htcht/helpers/version_helpers'
 
 module Htcht
   module CLI
