@@ -12,6 +12,9 @@ module Htcht
         include Htcht::Helpers::NameHelpers
         include Htcht::Helpers::VersionHelpers
 
+        LATEST_RUBY = latest_ruby
+        LATEST_RAILS = latest_rails
+
         def self.source_root
           File.dirname(__FILE__)
         end
@@ -21,8 +24,8 @@ module Htcht
         method_option :api, type: :boolean, default: false, :aliases => '-a', :desc => 'default: [--no-api] Generate Rails App in API mode.'
         method_option :init, type: :boolean, default: false, :aliases => '-i', :desc => 'default: [--no-init] Generate a base Rails app with custom Gemfile and configs. (This along with "--api" is the base for new Rails APIs at Trim Agency).'
         method_option :test, type: :boolean, default: false, :desc => 'default: [--no-test]'
-        method_option :ruby_version, type: :string, default: latest_ruby, :desc => "default: [#{latest_ruby}] Set the version of Ruby to be used."
-        method_option :rails_version, type: :string, default: latest_rails, :desc => "default: [#{latest_rails}] Set the version of Rails to be used."
+        method_option :ruby_version, type: :string, default: LATEST_RUBY, :desc => "default: [#{latest_ruby}] Set the version of Ruby to be used."
+        method_option :rails_version, type: :string, default: LATEST_RAILS, :desc => "default: [#{latest_rails}] Set the version of Rails to be used."
         def new(appname)
           unless docker_running?
             puts 'Check that Docker is installed and running'
