@@ -1,4 +1,4 @@
-FROM set_ruby_version
+FROM ruby:set_ruby_version
 MAINTAINER stevetwitte@gmail.com
 
 RUN apt-get update && apt-get install -y \
@@ -14,7 +14,7 @@ ENV LC_ALL en_US.UTF-8
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN gem install rails
+RUN gem install rails --version set_rails_version
 #COPY Gemfile Gemfile.lock ./
 #RUN gem install bundler && bundle install --jobs 20 --retry 5
 

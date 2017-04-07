@@ -11,7 +11,7 @@ module Htcht
       def latest_rails
         # The rubygems.org API does allow you to get the latest version
         # of Rails but it is a private api (see above comment as well)
-        '5.0.1'
+        '5.0.2'
       end
 
     end
