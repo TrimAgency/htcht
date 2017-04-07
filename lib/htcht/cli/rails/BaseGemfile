@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby 'set_ruby_version'
 
-gem 'rails'
+gem 'rails', 'set_rails_version'

@@ -1,5 +1,6 @@
 require 'htcht/helpers/general_helpers'
 require 'htcht/helpers/name_helpers'
+require 'htcht/helpers/version_helpers'
 
 module Htcht
   module CLI
@@ -9,6 +10,7 @@ module Htcht
         include Thor::Actions
         include Htcht::Helpers::GeneralHelpers
         include Htcht::Helpers::NameHelpers
+        include Htcht::Helpers::VersionHelpers
 
         def self.source_root
           File.dirname(__FILE__)
@@ -19,12 +21,16 @@ module Htcht
         method_option :api, type: :boolean, default: false, :aliases => '-a', :desc => 'default: [--no-api] Generate Rails App in API mode.'
         method_option :init, type: :boolean, default: false, :aliases => '-i', :desc => 'default: [--no-init] Generate a base Rails app with custom Gemfile and configs. (This along with "--api" is the base for new Rails APIs at Trim Agency).'
         method_option :test, type: :boolean, default: false, :desc => 'default: [--no-test]'
+        method_option :ruby_version, type: :string, :desc => "default: [latest version] Set the version of Ruby to be used."
+        method_option :rails_version, type: :string, :desc => "default: [latest version] Set the version of Rails to be used."
         def new(appname)
           unless docker_running?
             puts 'Check that Docker is installed and running'
             return
           end
 
+          options[:ruby_version] ||= latest_ruby
+          options[:rails_version] ||= latest_rails
 
           # Format the appname as snake case for folders, etc.
           snake_name = snake_casify(appname)
@@ -49,7 +55,7 @@ module Htcht
             return
           else
             template_path = "#{snake_name}/default_template.rb"
-            copy_file 'templates/default_template.rb', template_path 
+            copy_file 'templates/default_template.rb', template_path
             rails_new_command.concat(' -m default_template.rb')
           end
 
@@ -82,6 +88,11 @@ module Htcht
           empty_directory(snake_name)
           copy_file('docker-compose.yml', "#{snake_name}/docker-compose.yml")
           copy_file('Dockerfile', "#{snake_name}/Dockerfile")
+          gsub_file("#{snake_name}/Dockerfile", 'set_ruby_version', options[:ruby_version])
+          gsub_file("#{snake_name}/Dockerfile", 'set_rails_version', options[:rails_version])
+          gsub_file("#{snake_name}/Gemfile", 'set_ruby_version', options[:ruby_version])
+          gsub_file("#{snake_name}/Gemfile", 'set_rails_version', options[:rails_version])
+
 
           inside(snake_name) do
 
@@ -92,7 +103,7 @@ module Htcht
             run(rails_new_command)
 
             # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
-            gsub_file('Dockerfile', 'RUN gem install rails', '#RUN gem install rails')
+            gsub_file('Dockerfile', "RUN gem install rails", '#RUN gem install rails')
             gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
             gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
             run('docker-compose build')
