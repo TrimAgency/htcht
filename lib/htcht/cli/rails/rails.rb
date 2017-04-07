@@ -29,9 +29,6 @@ module Htcht
             return
           end
 
-          options[:ruby_version] ||= latest_ruby
-          options[:rails_version] ||= latest_rails
-
           # Format the appname as snake case for folders, etc.
           snake_name = snake_casify(appname)
 
@@ -89,11 +86,10 @@ module Htcht
           empty_directory(snake_name)
           copy_file('docker-compose.yml', "#{snake_name}/docker-compose.yml")
           copy_file('Dockerfile', "#{snake_name}/Dockerfile")
-          gsub_file("#{snake_name}/Dockerfile", 'set_ruby_version', options[:ruby_version])
-          gsub_file("#{snake_name}/Dockerfile", 'set_rails_version', options[:rails_version])
-          gsub_file("#{snake_name}/Gemfile", 'set_ruby_version', options[:ruby_version])
-          gsub_file("#{snake_name}/Gemfile", 'set_rails_version', options[:rails_version])
-
+          gsub_file("#{snake_name}/Dockerfile", 'set_ruby_version', ruby_version)
+          gsub_file("#{snake_name}/Dockerfile", 'set_rails_version', rails_version)
+          gsub_file("#{snake_name}/Gemfile", 'set_ruby_version', ruby_version)
+          gsub_file("#{snake_name}/Gemfile", 'set_rails_version', rails_version)
 
           inside(snake_name) do
 
@@ -128,6 +124,14 @@ module Htcht
         def add_app_names_to_template(path:, appname:, snake_name:)
           gsub_file(path, 'set_appname', appname)
           gsub_file(path, 'set_snake_name', snake_name)
+        end
+
+        def ruby_version
+          options[:ruby_version] || latest_ruby
+        end
+
+        def rails_version
+          options[:rails_version] || latest_rails
         end
       end
     end
