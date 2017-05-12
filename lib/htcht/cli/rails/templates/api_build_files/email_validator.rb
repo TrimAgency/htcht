@@ -1,5 +1,5 @@
 class EmailValidator < ActiveModel::EachValidator
-  VALID_EMAIL_REGEX = %r(\A[^@]+@(?:[^@]+\.)+[^@.]+\z)
+  VALID_EMAIL_REGEX = %r{//\A[^@]+@(?:[^@]+\.)+[^@.]+\z//}
 
   def validate_each(record, attribute, value)
     unless value =~ VALID_EMAIL_REGEX

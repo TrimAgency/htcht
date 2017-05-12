@@ -1,7 +1,7 @@
 module Htcht
   module Helpers
+    # Helpers related to getting versions
     module VersionHelpers
-
       def latest_ruby
         # This is going to be hard coded for now because I can't seem to
         # find a public api for getting the latest version of Ruby
@@ -13,8 +13,6 @@ module Htcht
         # of Rails but it is a private api (see above comment as well)
         '5.0.2'
       end
-
     end
   end
 end
-
