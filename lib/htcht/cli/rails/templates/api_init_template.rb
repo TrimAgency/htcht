@@ -34,6 +34,7 @@ gem_group :development do
   gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'rubocop', require: false
 end
 
 gem_group :test do
@@ -115,6 +116,7 @@ copy_file('build_files/rails_helper.rb', 'spec/rails_helper.rb')
 copy_file('build_files/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb')
 copy_file('build_files/seeds.rb', 'db/seeds.rb')
 copy_file('build_files/active_model_serializers.rb', 'config/initializers/active_model_serializers.rb')
+copy_file('build_files/.rubocop.yml', '.rubocop.yml')
 empty_directory('db/seeds')
 empty_directory('db/seeds/development')
 empty_directory('db/seeds/test')
