@@ -1,0 +1,28 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Exclude:
+    - 'bin/spring'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/**/*'
+
+Metrics/LineLength:
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/**/*'
+    - 'Rakefile'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/**/*'
