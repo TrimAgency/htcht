@@ -15,7 +15,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 RUN gem install rails --version set_rails_version
-#COPY Gemfile Gemfile.lock ./
+#COPY Gemfile Gemfile.lock
 #RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 COPY . ./
