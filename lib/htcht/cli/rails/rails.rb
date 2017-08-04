@@ -104,13 +104,7 @@ module Htcht
             # Build the containers
             run('docker-compose build')
 
-            # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
-            #gsub_file('Dockerfile', "RUN gem install rails", '#RUN gem install rails')
-            #gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
-            #gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
-            #run("docker rmi #{appname.downcase}_app -f")
-            #run('docker-compose build')
-
+            # Create DB and run migrations
             run('docker-compose run app rake db:create')
             run('docker-compose run app rake db:migrate')
 

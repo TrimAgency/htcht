@@ -1,8 +1,12 @@
 FROM ruby:set_ruby_version
 MAINTAINER stevetwitte@gmail.com
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -qq && apt-get install -y \
+  apt-utils \
   build-essential \
+  libpq-dev \
   locales \
   nodejs
 

@@ -2,6 +2,10 @@ def source_paths
   [File.expand_path(File.dirname(__FILE__))]
 end
 
+# Clean up Gemfile
+# remove commented lines
+gsub_file("Gemfile", /#.*\n/, '')
+
 # Install Gems
 # ----------------------------
 gem 'rails'
