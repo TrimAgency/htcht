@@ -35,7 +35,7 @@ module Htcht
           # Format the appname as snake case for folders, etc.
           snake_name = snake_casify(appname)
 
-          rails_new_command = 'docker-compose run app rails new . --database=postgresql --skip-bundle'
+          rails_new_command = 'docker-compose run app rails new . --database=postgresql'
 
           # Set the application template
           # TODO: Refactor to be dynamic from a directory
@@ -69,6 +69,7 @@ module Htcht
 
           # Copy this over so that Docker can run Rails new
           copy_file 'BaseGemfile', "#{snake_name}/Gemfile"
+          copy_file 'BaseGemfile.lock', "#{snake_name}/Gemfile.lock"
           rails_new_command.concat(' --force')
 
           if options[:api]
@@ -97,19 +98,18 @@ module Htcht
 
 
           inside(snake_name) do
-
-            # Build the containers
-            run('docker-compse build')
-
             # Run the command to generate a new rails app
             run(rails_new_command)
 
-            # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
-            gsub_file('Dockerfile', "RUN gem install rails", '#RUN gem install rails')
-            gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
-            gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
-            run("docker rmi #{appname.downcase}_app -f")
+            # Build the containers
             run('docker-compose build')
+
+            # Edit the Dockerfile and rebuild the app now that it has a Gemfile and Gemfile.lock
+            #gsub_file('Dockerfile', "RUN gem install rails", '#RUN gem install rails')
+            #gsub_file('Dockerfile', '#COPY Gemfile Gemfile.lock ./', 'COPY Gemfile Gemfile.lock ./')
+            #gsub_file('Dockerfile', '#RUN gem install bundler && bundle install --jobs 20 --retry 5', 'RUN gem install bundler && bundle install --jobs 20 --retry 5')
+            #run("docker rmi #{appname.downcase}_app -f")
+            #run('docker-compose build')
 
             run('docker-compose run app rake db:create')
             run('docker-compose run app rake db:migrate')

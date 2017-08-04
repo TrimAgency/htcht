@@ -1,7 +1,7 @@
 FROM ruby:set_ruby_version
 MAINTAINER stevetwitte@gmail.com
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -qq && apt-get install -y \
   build-essential \
   locales \
   nodejs
@@ -14,12 +14,9 @@ ENV LC_ALL en_US.UTF-8
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN gem install rails --version set_rails_version
-#COPY Gemfile Gemfile.lock
-#RUN gem install bundler && bundle install --jobs 20 --retry 5
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 
-COPY . ./
+RUN bundle install
 
-EXPOSE 3000
-
-CMD ["rm", "-f", "tmp/pids/server.pid", "&&", "bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
+ADD . /app
