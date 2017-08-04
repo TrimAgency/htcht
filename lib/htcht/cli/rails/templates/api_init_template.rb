@@ -4,8 +4,6 @@ end
 
 # Install Gems
 # ----------------------------
-gem 'rails'
-gem 'pg'
 gem 'puma'
 gem 'bcrypt'
 gem 'rack-cors'
