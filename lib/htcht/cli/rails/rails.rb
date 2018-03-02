@@ -39,10 +39,6 @@ module Htcht
             gsub_file('config/database.yml',
                       'TRIM_STARTER_DATABASE_PASSWORD',
                       "#{snake_name.upcase}_DATABASE_PASSWORD")
-
-            run('docker-compose build')
-            run('docker-compose run app rake db:create')
-            run('docker-compose run app rake db:migrate')
           end
         end
       end
