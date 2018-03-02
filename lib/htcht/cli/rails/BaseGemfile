@@ -1,5 +1,0 @@
-source 'https://rubygems.org'
-
-ruby 'set_ruby_version'
-
-gem 'rails', 'set_rails_version'
