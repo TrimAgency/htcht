@@ -6,8 +6,8 @@ module Htcht
   # All subcommands go here
   class Main < Thor
 
-    desc "rails COMMANDS", "For all your Ruby on Rails needs."
-    subcommand "rails", Htcht::CLI::Rails::Rails
+    desc "rails-api", "Creates a Ruby on Rails API with the Trim Starter Template"
+    subcommand "rails-api", Htcht::CLI::Rails::Rails
 
   end
 
