@@ -17,13 +17,14 @@ module Htcht
 
         desc 'new AppName', 'Create a new base Rails App inside a Docker Container with Postgres setup as the database.'
         def new(appname)
+          capitalize_name = titleize(appname)
           snake_name = snake_casify(appname)
           run("git clone #{RAILS_STARTER_URL} #{snake_name}")
 
           inside(snake_name) do
             gsub_file('config/application.rb',
                       'module TrimStarter',
-                      "module #{appname}")
+                      "module #{capitalize_name}")
             gsub_file('config/database.yml',
                       'trim_starter_development',
                       "#{snake_name}_development")
