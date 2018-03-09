@@ -10,6 +10,15 @@ module Htcht
           tr("-", "_").
           downcase
       end
+
+      def dash_casify(name)
+        name.gsub(/::/, '/').
+            gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+            gsub(/([a-z\d])([A-Z])/,'\1_\2').
+            gsub(/\s+/, '-').
+            tr('_', '-').
+            downcase
+      end
     end
   end
 end
