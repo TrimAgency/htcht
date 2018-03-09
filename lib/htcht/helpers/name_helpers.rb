@@ -10,6 +10,10 @@ module Htcht
           tr("-", "_").
           downcase
       end
+
+      def titleize(appname)
+        appname.gsub(/\w+/, &:capitalize)
+      end
     end
   end
 end
